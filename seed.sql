@@ -24,7 +24,7 @@ CREATE TABLE video
 (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
-    category_name INT REFERENCES category(id),
+    category_name INT REFERENCES category(id) ON DELETE CASCADE,
     video_title VARCHAR NOT NULL,
     video_url VARCHAR NOT NULL,
     annotation VARCHAR,
@@ -35,8 +35,8 @@ CREATE TABLE video
 CREATE TABLE response
 (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id),
-    video_id INT REFERENCES video(id),
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    video_id INT REFERENCES video(id) ON DELETE CASCADE,
     video_title VARCHAR NOT NULL,
     annotation VARCHAR,
     description VARCHAR,
@@ -46,8 +46,8 @@ CREATE TABLE response
 CREATE TABLE response_to_response
 (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id),
-    video_id INT REFERENCES response(id),
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    video_id INT REFERENCES response(id) ON DELETE CASCADE,
     video_title VARCHAR NOT NULL,
     annotation VARCHAR,
     description VARCHAR,
@@ -57,8 +57,8 @@ CREATE TABLE response_to_response
 CREATE TABLE followers
 (
     id SERIAL PRIMARY KEY,
-    follower INT REFERENCES users(id),
-    following INT REFERENCES users(id)
+    follower INT REFERENCES users(id) ON DELETE CASCADE,
+    following INT REFERENCES users(id) ON DELETE CASCADE
 );
 
 -- INSERT INTO users
