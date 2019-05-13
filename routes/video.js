@@ -1,13 +1,12 @@
 const express = require('express');
-const userRouter = express.Router();
-const userService = require('../services/user');
+const videoRouter = express.Router();
+const videoService = require('../services/video');
 
-userRouter.get('/:username', (req, res) => {
+videoRouter.get('/:id', (req, res) => {
     const {
-        username
+        id
     } = req.params;
-
-    userService.getUser(username)
+    videoService.getVideos(id)
         .then(data => res.status(200).json({
             data
         }))
@@ -16,17 +15,17 @@ userRouter.get('/:username', (req, res) => {
         }));
 });
 
-userRouter.post('/', (req, res) => {
+videoRouter.post('/', (req, res) => {
     const {
-        username,
-        email,
-        firebaseUid,
-        firstName,
-        lastName,
-        imgUrl
+        id,
+        category,
+        title,
+        url,
+        annotation,
+        description
     } = req.body;
 
-    userService.createUser(username, email, firebaseUid, firstName, lastName, imgUrl)
+    videoService.postVideo(id, category, title, url, annotation, description)
         .then(data => res.status(200).json({
             data
         }))
@@ -35,12 +34,27 @@ userRouter.post('/', (req, res) => {
         }));
 });
 
-userRouter.delete('/', (req, res) => {
+videoRouter.delete('/', (req, res) => {
     const {
-        username
+        id
     } = req.body;
 
-    userService.deleteUser(username)
+    videoService.deleteVideo(id)
+        .then(data => res.status(200).json({
+            data
+        }))
+        .catch(err => res.status(400).json({
+            err
+        }))
+});
+
+videoRouter.put('/', (req, res) => {
+    const {
+        title,
+        description
+    } = req.body;
+
+    videoService.updateVideo(title, description)
         .then(data => res.status(200).json({
             data
         }))
@@ -49,14 +63,4 @@ userRouter.delete('/', (req, res) => {
         }));
 });
 
-userRouter.put('/', (req, res) => {
-    userService.updateUser()
-        .then(data => res.status(200).json({
-            data
-        }))
-        .catch(err => res.status(400).json({
-            err
-        }));
-});
-
-module.exports = userRouter;
+module.exports = videoRouter;

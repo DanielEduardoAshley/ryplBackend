@@ -24,7 +24,7 @@ CREATE TABLE video
 (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
-    category_name INT REFERENCES category(id) ON DELETE CASCADE,
+    category_id INT REFERENCES category(id) ON DELETE CASCADE,
     video_title VARCHAR NOT NULL,
     video_url VARCHAR NOT NULL,
     annotation VARCHAR,
@@ -61,35 +61,35 @@ CREATE TABLE followers
     following INT REFERENCES users(id) ON DELETE CASCADE
 );
 
--- INSERT INTO users
---     (username, email,firebase_uid,firstname,lastname,img_url)
--- VALUES
---     ('a', 'b', 'c', 'd', 'e', 'f');
+INSERT INTO users
+    (username, email,firebase_uid,firstname,lastname,img_url)
+VALUES
+    ('a', 'b', 'c', 'd', 'e', 'f');
 
--- INSERT INTO users
---     (username, email,firebase_uid,firstname,lastname,img_url)
--- VALUES
---     ('aa', 'bb', 'cc', 'dd', 'ee', 'ff');
+INSERT INTO users
+    (username, email,firebase_uid,firstname,lastname,img_url)
+VALUES
+    ('aa', 'bb', 'cc', 'dd', 'ee', 'ff');
 
--- INSERT INTO followers
---     (follower)
--- VALUES
---     (1);
+INSERT INTO followers
+    (follower)
+VALUES
+    (1);
 
--- INSERT INTO video
---     (user_id,video_title,video_url)
--- VALUES
---     (1, 'abc', 'def');
+INSERT INTO video
+    (user_id,video_title,video_url)
+VALUES
+    (1, 'abc', 'def');
 
--- INSERT INTO response
---     (user_id,video_id,video_title)
--- VALUES
---     (1, 1, 'abc');
+INSERT INTO response
+    (user_id,video_id,video_title)
+VALUES
+    (1, 1, 'abc');
 
--- INSERT INTO response_to_response
---     (video_id, video_title)
--- VALUES
---     (1, 'ew')
+INSERT INTO response_to_response
+    (video_id, video_title)
+VALUES
+    (1, 'ew')
 
 
 
