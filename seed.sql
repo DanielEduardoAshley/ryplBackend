@@ -11,7 +11,7 @@ CREATE TABLE users
     firebase_uid VARCHAR NOT NULL,
     firstname VARCHAR NOT NULL,
     lastname VARCHAR NOT NULL,
-    picture_url VARCHAR
+    img_url VARCHAR
 );
 
 CREATE TABLE category
@@ -62,12 +62,12 @@ CREATE TABLE followers
 );
 
 -- INSERT INTO users
---     (username, email,firebase_uid,firstname,lastname,picture_url)
+--     (username, email,firebase_uid,firstname,lastname,img_url)
 -- VALUES
 --     ('a', 'b', 'c', 'd', 'e', 'f');
 
 -- INSERT INTO users
---     (username, email,firebase_uid,firstname,lastname,picture_url)
+--     (username, email,firebase_uid,firstname,lastname,img_url)
 -- VALUES
 --     ('aa', 'bb', 'cc', 'dd', 'ee', 'ff');
 
