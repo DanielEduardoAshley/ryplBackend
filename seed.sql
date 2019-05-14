@@ -11,7 +11,7 @@ CREATE TABLE users
     firebase_uid VARCHAR NOT NULL,
     firstname VARCHAR NOT NULL,
     lastname VARCHAR NOT NULL,
-    picture_url VARCHAR
+    img_url VARCHAR
 );
 
 CREATE TABLE category
@@ -24,7 +24,7 @@ CREATE TABLE video
 (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
-    category_name INT REFERENCES category(id),
+    category_id INT REFERENCES category(id) ON DELETE CASCADE,
     video_title VARCHAR NOT NULL,
     video_url VARCHAR NOT NULL,
     annotation VARCHAR,
@@ -35,8 +35,8 @@ CREATE TABLE video
 CREATE TABLE response
 (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id),
-    video_id INT REFERENCES video(id),
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    video_id INT REFERENCES video(id) ON DELETE CASCADE,
     video_title VARCHAR NOT NULL,
     annotation VARCHAR,
     description VARCHAR,
@@ -46,8 +46,8 @@ CREATE TABLE response
 CREATE TABLE response_to_response
 (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id),
-    video_id INT REFERENCES response(id),
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    video_id INT REFERENCES response(id) ON DELETE CASCADE,
     video_title VARCHAR NOT NULL,
     annotation VARCHAR,
     description VARCHAR,
@@ -57,39 +57,39 @@ CREATE TABLE response_to_response
 CREATE TABLE followers
 (
     id SERIAL PRIMARY KEY,
-    follower INT REFERENCES users(id),
-    following INT REFERENCES users(id)
+    follower INT REFERENCES users(id) ON DELETE CASCADE,
+    following INT REFERENCES users(id) ON DELETE CASCADE
 );
 
--- INSERT INTO users
---     (username, email,firebase_uid,firstname,lastname,picture_url)
--- VALUES
---     ('a', 'b', 'c', 'd', 'e', 'f');
+INSERT INTO users
+    (username, email,firebase_uid,firstname,lastname,img_url)
+VALUES
+    ('a', 'b', 'c', 'd', 'e', 'f');
 
--- INSERT INTO users
---     (username, email,firebase_uid,firstname,lastname,picture_url)
--- VALUES
---     ('aa', 'bb', 'cc', 'dd', 'ee', 'ff');
+INSERT INTO users
+    (username, email,firebase_uid,firstname,lastname,img_url)
+VALUES
+    ('aa', 'bb', 'cc', 'dd', 'ee', 'ff');
 
--- INSERT INTO followers
---     (follower)
--- VALUES
---     (1);
+INSERT INTO followers
+    (follower)
+VALUES
+    (1);
 
--- INSERT INTO video
---     (user_id,video_title,video_url)
--- VALUES
---     (1, 'abc', 'def');
+INSERT INTO video
+    (user_id,video_title,video_url)
+VALUES
+    (1, 'abc', 'def');
 
--- INSERT INTO response
---     (user_id,video_id,video_title)
--- VALUES
---     (1, 1, 'abc');
+INSERT INTO response
+    (user_id,video_id,video_title)
+VALUES
+    (1, 1, 'abc');
 
--- INSERT INTO response_to_response
---     (video_id, video_title)
--- VALUES
---     (1, 'ew')
+INSERT INTO response_to_response
+    (video_id, video_title)
+VALUES
+    (1, 'ew')
 
 
 
