@@ -50,11 +50,12 @@ videoRouter.delete('/', (req, res) => {
 
 videoRouter.put('/', (req, res) => {
     const {
+        id,
         title,
         description
     } = req.body;
 
-    videoService.updateVideo(title, description)
+    videoService.updateVideo(id, title, description)
         .then(data => res.status(200).json({
             data
         }))
@@ -63,4 +64,4 @@ videoRouter.put('/', (req, res) => {
         }));
 });
 
-module.exports = videoRouter;
+module.exports = videoRouter
