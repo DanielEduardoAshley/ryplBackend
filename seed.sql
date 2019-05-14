@@ -47,7 +47,8 @@ CREATE TABLE response_to_response
 (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
-    video_id INT REFERENCES response(id) ON DELETE CASCADE,
+    video_id INT REFERENCES video(id) ON DELETE CASCADE,
+    response_id INT REFERENCES response(id) ON DELETE CASCADE,
     video_title VARCHAR NOT NULL,
     annotation VARCHAR,
     description VARCHAR,
