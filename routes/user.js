@@ -50,7 +50,15 @@ userRouter.delete('/', (req, res) => {
 });
 
 userRouter.put('/', (req, res) => {
-    userService.updateUser()
+    const {
+        id,
+        username,
+        firstName,
+        lastName,
+        imgUrl
+    } = req.body;
+
+    userService.updateUser(id, username, firstName, lastName, imgUrl)
         .then(data => res.status(200).json({
             data
         }))

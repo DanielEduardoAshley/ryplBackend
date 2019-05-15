@@ -38,6 +38,7 @@ CREATE TABLE response
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
     video_id INT REFERENCES video(id) ON DELETE CASCADE,
     video_title VARCHAR NOT NULL,
+    video_url VARCHAR NOT NULL,
     annotation VARCHAR,
     description VARCHAR,
     time_posted TIMESTAMP DEFAULT NOW()
@@ -47,8 +48,10 @@ CREATE TABLE response_to_response
 (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
-    video_id INT REFERENCES response(id) ON DELETE CASCADE,
+    video_id INT REFERENCES video(id) ON DELETE CASCADE,
+    response_id INT REFERENCES response(id) ON DELETE CASCADE,
     video_title VARCHAR NOT NULL,
+    video_url VARCHAR NOT NULL,
     annotation VARCHAR,
     description VARCHAR,
     time_posted TIMESTAMP DEFAULT NOW()
@@ -57,39 +60,63 @@ CREATE TABLE response_to_response
 CREATE TABLE followers
 (
     id SERIAL PRIMARY KEY,
-    follower INT REFERENCES users(id) ON DELETE CASCADE,
-    following INT REFERENCES users(id) ON DELETE CASCADE
+    follower_id INT REFERENCES users(id) ON DELETE CASCADE,
+    following_id INT REFERENCES users(id) ON DELETE CASCADE
 );
 
 INSERT INTO users
     (username, email,firebase_uid,firstname,lastname,img_url)
 VALUES
-    ('a', 'b', 'c', 'd', 'e', 'f');
-
-INSERT INTO users
-    (username, email,firebase_uid,firstname,lastname,img_url)
-VALUES
-    ('aa', 'bb', 'cc', 'dd', 'ee', 'ff');
+    ('john222', 'john@email.com', 'fbuid', 'john', 'doe', 'imgurl'),
+    ('syed327', 'aziz', 'fbuid2', 'syed', 'aziz', 'url'),
+    ('dan7', 'dan@email.com', 'fbuid3', 'dan', 'ash', 'url3'),
+    ('yun99f', 'yun', 'fbuid3', 'yun', 'huang', 'url4'),
+    ('abdul', 'abdul@email', 'fbuid5', 'abdul', 'ab', 'url5');
 
 INSERT INTO followers
-    (follower)
+    (follower_id, following_id)
 VALUES
-    (1);
+    (1, 2),
+    (1, 3),
+    (1, 4),
+    (1, 5),
+    (2, 1),
+    (2, 5),
+    (4, 3),
+    (3, 1);
+
+INSERT INTO category
+    (name)
+VALUES
+    ('news'),
+    ('comedy'),
+    ('music'),
+    ('art'),
+    ('cooking');
 
 INSERT INTO video
-    (user_id,video_title,video_url)
+    (user_id, category_id, video_title,video_url, description)
 VALUES
-    (1, 'abc', 'def');
+    (1, 1, 'fake news', 'urlforvid', 'news is fake now!'),
+    (1, 2, 'my cat is cute', 'urlforvid2', 'he scratched me'),
+    (2, 3, 'hear me sing', 'urlforvid3', 'my voice is nice'),
+    (3, 4, 'my painting', 'urlforvid4', 'watch me draw'),
+    (4, 5, 'im making chicken', 'urlforvid5', 'curry chicken');
+
 
 INSERT INTO response
-    (user_id,video_id,video_title)
+    (user_id,video_id,video_title, video_url, description)
 VALUES
-    (1, 1, 'abc');
+    (1, 5, 'my recipe is better', 'urlforvid', 'use cayenne pepper'),
+    (2, 4, 'i drew something similar', 'url vid', 'look at my painting of a tree'),
+    (3, 5, 'fried chicken is the way to go', 'vid url', 'no fry, no eat'),
+    (5, 3, 'we should duet', 'fb url', 'lets collab');
 
 INSERT INTO response_to_response
-    (video_id, video_title)
+    (user_id, video_id, response_id, video_title, video_url, description)
 VALUES
-    (1, 'ew')
+    (1, 3, 4, 'let me join!', 'firebase url', 'we should start a band!'),
+    (5, 5, 3, 'nah man, grilled!', 'url for fb', 'grill it like this, its healthier');
 
 
 

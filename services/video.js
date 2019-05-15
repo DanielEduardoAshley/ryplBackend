@@ -40,10 +40,18 @@ videoService.deleteVideo = (id) => {
     });
 };
 
-videoService.updateVideo = () => {
+videoService.updateVideo = (id, title, description) => {
     const sql = `
-
+    UPDATE video
+    SET video_title = $[title], description = $[description]
+    WHERE user_id = $[id]
+    RETURNING id
     `
+    return db.one(sql, {
+        id,
+        title,
+        description
+    })
 }
 
 

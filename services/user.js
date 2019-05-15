@@ -33,9 +33,21 @@ userService.createUser = (username, email, firebaseUid, firstName, lastName, img
     });
 };
 
-userService.updateUser = () => {
-
-}
+userService.updateUser = (id, username, firstName, lastName, imgUrl) => {
+    const sql = `
+    UPDATE users
+    SET username = $[username], firstname = $[firstName], lastname = $[lastName], img_url = $[imgUrl]
+    WHERE id = $[id]
+    RETURNING id
+    `;
+    return db.one(sql, {
+        id,
+        username,
+        firstName,
+        lastName,
+        imgUrl
+    });
+};
 
 userService.deleteUser = (username) => {
     const sql = `
@@ -47,7 +59,7 @@ userService.deleteUser = (username) => {
     return db.none(sql, {
         username
     });
-}
+};
 
 
 
