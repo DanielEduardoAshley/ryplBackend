@@ -15,6 +15,16 @@ responseRouter.get('/:id', (req, res) => {
         }));
 });
 
+responseRouter.post('/response', (req, res) => {
+    const {
+        userID,
+        videoID,
+        videoTitle,
+        videoUrl,
+        description
+    } = req.body;
 
+
+})
 
 module.exports = responseRouter;
