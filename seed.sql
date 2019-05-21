@@ -26,36 +26,37 @@ CREATE TABLE video
     user_id INT REFERENCES users(id),
     category_id INT REFERENCES category(id) ON DELETE CASCADE,
     video_title VARCHAR NOT NULL,
+    response_to INT REFERENCES video(id) NULL,
     video_url VARCHAR NOT NULL,
     annotation VARCHAR,
     description VARCHAR,
     time_posted TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE response
-(
-    id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id) ON DELETE CASCADE,
-    video_id INT REFERENCES video(id) ON DELETE CASCADE,
-    video_title VARCHAR NOT NULL,
-    video_url VARCHAR NOT NULL,
-    annotation VARCHAR,
-    description VARCHAR,
-    time_posted TIMESTAMP DEFAULT NOW()
-);
+-- CREATE TABLE response
+-- (
+--     id SERIAL PRIMARY KEY,
+--     user_id INT REFERENCES users(id) ON DELETE CASCADE,
+--     video_id INT REFERENCES video(id) ON DELETE CASCADE,
+--     video_title VARCHAR NOT NULL,
+--     video_url VARCHAR NOT NULL,
+--     annotation VARCHAR,
+--     description VARCHAR,
+--     time_posted TIMESTAMP DEFAULT NOW()
+-- );
 
-CREATE TABLE response_to_response
-(
-    id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id) ON DELETE CASCADE,
-    video_id INT REFERENCES video(id) ON DELETE CASCADE,
-    response_id INT REFERENCES response(id) ON DELETE CASCADE,
-    video_title VARCHAR NOT NULL,
-    video_url VARCHAR NOT NULL,
-    annotation VARCHAR,
-    description VARCHAR,
-    time_posted TIMESTAMP DEFAULT NOW()
-);
+-- CREATE TABLE response_to_response
+-- (
+--     id SERIAL PRIMARY KEY,
+--     user_id INT REFERENCES users(id) ON DELETE CASCADE,
+--     video_id INT REFERENCES video(id) ON DELETE CASCADE,
+--     response_id INT REFERENCES response(id) ON DELETE CASCADE,
+--     video_title VARCHAR NOT NULL,
+--     video_url VARCHAR NOT NULL,
+--     annotation VARCHAR,
+--     description VARCHAR,
+--     time_posted TIMESTAMP DEFAULT NOW()
+-- );
 
 CREATE TABLE followers
 (
@@ -95,28 +96,28 @@ VALUES
     ('cooking');
 
 INSERT INTO video
-    (user_id, category_id, video_title,video_url, description)
+    (user_id, category_id, video_title,response_to,video_url, description)
 VALUES
-    (1, 1, 'fake news', 'urlforvid', 'news is fake now!'),
-    (1, 2, 'my cat is cute', 'urlforvid2', 'he scratched me'),
-    (2, 3, 'hear me sing', 'urlforvid3', 'my voice is nice'),
-    (3, 4, 'my painting', 'urlforvid4', 'watch me draw'),
-    (4, 5, 'im making chicken', 'urlforvid5', 'curry chicken');
+    (1, 1, 'fake news', null, 'urlforvid', 'news is fake now!'),
+    (1, 2, 'my cat is cute', 1, 'urlforvid2', 'he scratched me'),
+    (2, 3, 'hear me sing', null, 'urlforvid3', 'my voice is nice'),
+    (3, 4, 'my painting', null, 'urlforvid4', 'watch me draw'),
+    (4, 5, 'im making chicken', null, 'urlforvid5', 'curry chicken');
 
 
-INSERT INTO response
-    (user_id,video_id,video_title, video_url, description)
-VALUES
-    (1, 5, 'my recipe is better', 'urlforvid', 'use cayenne pepper'),
-    (2, 4, 'i drew something similar', 'url vid', 'look at my painting of a tree'),
-    (3, 5, 'fried chicken is the way to go', 'vid url', 'no fry, no eat'),
-    (5, 3, 'we should duet', 'fb url', 'lets collab');
+-- INSERT INTO response
+--     (user_id,video_id,video_title, video_url, description)
+-- VALUES
+--     (1, 5, 'my recipe is better', 'urlforvid', 'use cayenne pepper'),
+--     (2, 4, 'i drew something similar', 'url vid', 'look at my painting of a tree'),
+--     (3, 5, 'fried chicken is the way to go', 'vid url', 'no fry, no eat'),
+--     (5, 3, 'we should duet', 'fb url', 'lets collab');
 
-INSERT INTO response_to_response
-    (user_id, video_id, response_id, video_title, video_url, description)
-VALUES
-    (1, 3, 4, 'let me join!', 'firebase url', 'we should start a band!'),
-    (5, 5, 3, 'nah man, grilled!', 'url for fb', 'grill it like this, its healthier');
+-- INSERT INTO response_to_response
+--     (user_id, video_id, response_id, video_title, video_url, description)
+-- VALUES
+--     (1, 3, 4, 'let me join!', 'firebase url', 'we should start a band!'),
+--     (5, 5, 3, 'nah man, grilled!', 'url for fb', 'grill it like this, its healthier');
 
 
 
