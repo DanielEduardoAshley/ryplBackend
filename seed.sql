@@ -28,8 +28,12 @@ CREATE TABLE video
     video_title VARCHAR NOT NULL,
     response_to INT REFERENCES video(id) NULL,
     video_url VARCHAR NOT NULL,
+    thumbnail_url VARCHAR,
     annotation VARCHAR,
     description VARCHAR,
+    likes INT,
+    dislikes INT,
+    views INT,
     time_posted TIMESTAMP DEFAULT NOW()
 );
 
@@ -96,13 +100,15 @@ VALUES
     ('cooking');
 
 INSERT INTO video
-    (user_id, category_id, video_title,response_to,video_url, description)
+    (user_id, category_id, video_title,response_to,video_url, description, likes, dislikes, views)
 VALUES
-    (1, 1, 'fake news', null, 'urlforvid', 'news is fake now!'),
-    (1, 2, 'my cat is cute', 1, 'urlforvid2', 'he scratched me'),
-    (2, 3, 'hear me sing', null, 'urlforvid3', 'my voice is nice'),
-    (3, 4, 'my painting', null, 'urlforvid4', 'watch me draw'),
-    (4, 5, 'im making chicken', null, 'urlforvid5', 'curry chicken');
+    (1, 1, 'my dog is happy', null, 'urlforvid', 'he wont stop licking me!', 10, 2, 20),
+    (1, 2, 'my cat is cute', 1, 'urlforvid2', 'he scratched me' , 0, 0, 5),
+    (2, 3, 'hear me sing', 1, 'urlforvid3', 'my voice is nice', 0, 0, 3),
+    (3, 4, 'my painting', 2, 'urlforvid4', 'watch me draw', 0, 0, 8),
+    (3, 5, 'im making chicken', 3, 'urlforvid5', 'curry chicken', 0, 0, 40),
+    (3, 5, 'im making chicken', 3, 'urlforvid5', 'curry chicken', 0, 0, 40),
+    (3, 5, 'im making chicken', 2, 'urlforvid5', 'curry chicken', 0, 0, 40)
 
 
 -- INSERT INTO response
