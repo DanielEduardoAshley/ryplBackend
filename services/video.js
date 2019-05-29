@@ -3,6 +3,63 @@ const {
 } = require('./dbConnect')
 const videoService = {};
 
+videoService.getPopularVideos = () => {
+    const sql = `
+    SELECT video.*,
+    rank() OVER(
+        ORDER BY views DESC
+    )
+    FROM video
+    LIMIT 10
+    `;
+
+    return db.any(sql);
+};
+
+videoService.getMasterVid = (id) => {
+    const sql = `
+    SELECT *
+    FROM video
+    WHERE id = $[id]
+    `;
+
+    return db.one(sql, {
+        id
+    });
+};
+
+videoService.getResponseToMaster = (id) => {
+    const sql = `
+    SELECT *
+    FROM video
+    WHERE response_to = $[id]
+    `;
+
+    return db.any(sql, {
+        id
+    })
+};
+
+videoService.getResponseToResponse = (id) => {
+    const sql = `
+    SELECT *
+    FROM video 
+    WHERE response_to = $[id]
+    `;
+
+    return db.any(sql, {
+        id
+    });
+}
+
+videoService.getAllCategories = () => {
+    const sql = `
+    SELECT *
+    FROM category
+    `;
+    return db.any(sql);
+}
+
 videoService.getVideos = (id) => {
     const sql = `
     SELECT *
