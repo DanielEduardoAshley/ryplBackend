@@ -1,6 +1,7 @@
 const {
     db
-} = require('./dbConnect')
+} = require('./dbConnect');
+
 const videoService = {};
 
 videoService.getPopularVideos = () => {
@@ -37,7 +38,7 @@ videoService.getResponseToMaster = (id) => {
 
     return db.any(sql, {
         id
-    })
+    });
 };
 
 videoService.getResponseToResponse = (id) => {
@@ -50,15 +51,16 @@ videoService.getResponseToResponse = (id) => {
     return db.any(sql, {
         id
     });
-}
+};
 
 videoService.getAllCategories = () => {
     const sql = `
     SELECT *
     FROM category
     `;
+
     return db.any(sql);
-}
+};
 
 videoService.getVidsOfCategory = (id) => {
     const sql = `
@@ -69,8 +71,8 @@ videoService.getVidsOfCategory = (id) => {
 
     return db.any(sql, {
         id
-    })
-}
+    });
+};
 
 videoService.getVideos = (id) => {
     const sql = `
@@ -78,22 +80,27 @@ videoService.getVideos = (id) => {
     FROM video
     WHERE user_id = $[id]
     `;
+
     return db.any(sql, {
         id
     });
 };
 
-videoService.postVideo = (id, category, title, url, annotation, description) => {
+videoService.postVideo = (userId, categoryId, videoTitle, responseTo, videoUrl, thumbnailUrl, annotation, description) => {
     const sql = `
-    INSERT INTO video (user_id, category_id, video_title, video_url, annotation, description)
-    VALUES ($[id], $[category], $[title], $[url], $[annotation], $[description])
-    RETURNING id`;
+    INSERT 
+    INTO video (user_id, category_id, video_title, response_to, video_url, thumbnail_url, annotation, description)
+    VALUES ($[userId], $[categoryId], $[videoTitle], $[responseTo], $[videoUrl], $[thumbnailUrl], $[annotation], $[description])
+    RETURNING id
+    `;
 
     return db.one(sql, {
-        id,
-        category,
-        title,
-        url,
+        userId,
+        categoryId,
+        videoTitle,
+        responseTo,
+        videoUrl,
+        thumbnailUrl,
         annotation,
         description
     });
@@ -120,8 +127,8 @@ videoService.updateVideo = (id, title, description) => {
         id,
         title,
         description
-    })
-}
+    });
+};
 
 
 module.exports = videoService;

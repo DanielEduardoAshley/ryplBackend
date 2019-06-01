@@ -3,15 +3,15 @@ const {
 } = require('./dbConnect')
 const userService = {};
 
-userService.getUser = (username) => {
+userService.getUser = (id) => {
     const sql = `
     SELECT * 
     FROM users
-    WHERE username = $[username]
+    WHERE firebase_uid = $[id]
     `;
 
     return db.one(sql, {
-        username
+        id
     });
 };
 
@@ -20,7 +20,6 @@ userService.createUser = (username, email, firebaseUid, firstName, lastName, img
     INSERT INTO users (username, email, firebase_uid, firstname, lastname, img_url)
     VALUES ($[username], $[email], $[firebaseUid], $[firstName], $[lastName], $[imgUrl])
     RETURNING id
-
     `;
 
     return db.one(sql, {
