@@ -37,31 +37,6 @@ CREATE TABLE video
     time_posted TIMESTAMP DEFAULT NOW()
 );
 
--- CREATE TABLE response
--- (
---     id SERIAL PRIMARY KEY,
---     user_id INT REFERENCES users(id) ON DELETE CASCADE,
---     video_id INT REFERENCES video(id) ON DELETE CASCADE,
---     video_title VARCHAR NOT NULL,
---     video_url VARCHAR NOT NULL,
---     annotation VARCHAR,
---     description VARCHAR,
---     time_posted TIMESTAMP DEFAULT NOW()
--- );
-
--- CREATE TABLE response_to_response
--- (
---     id SERIAL PRIMARY KEY,
---     user_id INT REFERENCES users(id) ON DELETE CASCADE,
---     video_id INT REFERENCES video(id) ON DELETE CASCADE,
---     response_id INT REFERENCES response(id) ON DELETE CASCADE,
---     video_title VARCHAR NOT NULL,
---     video_url VARCHAR NOT NULL,
---     annotation VARCHAR,
---     description VARCHAR,
---     time_posted TIMESTAMP DEFAULT NOW()
--- );
-
 CREATE TABLE followers
 (
     id SERIAL PRIMARY KEY,
@@ -93,11 +68,15 @@ VALUES
 INSERT INTO category
     (name)
 VALUES
-    ('news'),
-    ('comedy'),
-    ('music'),
-    ('art'),
-    ('cooking');
+    ('News'),
+    ('Comedy'),
+    ('Music'),
+    ('Art'),
+    ('Food'),
+    ('Politics'),
+    ('Religion'),
+    ('Science'),
+    ('Technology');
 
 INSERT INTO video
     (user_id, category_id, video_title,response_to,video_url, description, likes, dislikes, views)
@@ -109,22 +88,6 @@ VALUES
     (3, 5, 'im making chicken', 3, 'urlforvid5', 'curry chicken', 0, 0, 40),
     (3, 5, 'im making chicken', 3, 'urlforvid5', 'curry chicken', 0, 0, 40),
     (3, 5, 'im making chicken', 2, 'urlforvid5', 'curry chicken', 0, 0, 40)
-
-
--- INSERT INTO response
---     (user_id,video_id,video_title, video_url, description)
--- VALUES
---     (1, 5, 'my recipe is better', 'urlforvid', 'use cayenne pepper'),
---     (2, 4, 'i drew something similar', 'url vid', 'look at my painting of a tree'),
---     (3, 5, 'fried chicken is the way to go', 'vid url', 'no fry, no eat'),
---     (5, 3, 'we should duet', 'fb url', 'lets collab');
-
--- INSERT INTO response_to_response
---     (user_id, video_id, response_id, video_title, video_url, description)
--- VALUES
---     (1, 3, 4, 'let me join!', 'firebase url', 'we should start a band!'),
---     (5, 5, 3, 'nah man, grilled!', 'url for fb', 'grill it like this, its healthier');
-
 
 
 

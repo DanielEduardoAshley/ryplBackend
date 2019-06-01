@@ -24,33 +24,35 @@ videoRouter.get('/singlevid/:id', async (req, res) => {
     try {
         data.masterVid = await videoService.getMasterVid(id);
         data.responseToMaster = await videoService.getResponseToMaster(id);
-        // let idk = 5
-        // idk = data.responseToMaster.forEach(async response => {
-        //     const trial = await videoService.getResponseToResponse(response.id)
-        //     response.responses = trial;
-        // });
 
         for (let i = 0; i < data.responseToMaster.length; i++) {
-            const response = data.responseToMaster[i];
-            videoService.getResponseToResponse(response.id)
-                .then(data => {
-                    response.responses = data;
-                    return response.responses;
-                })
-                .then(res => data.responseToMaster[i].response = response)
-                .catch(err => console.log(err))
+            data.responseToMaster[i].response = await videoService.getResponseToResponse(data.responseToMaster[i].id);
         }
-        console.log(data)
 
         res.status(200).json({
             data
         });
+
     } catch (err) {
         res.status(400).json({
             err
         });
     }
-})
+});
+
+videoRouter.get('/category/:id', (req, res) => {
+    const {
+        id
+    } = req.params;
+
+    videoService.getVidsOfCategory(id)
+        .then(data => res.status(200).json({
+            data
+        }))
+        .catch(err => res.status(400).json({
+            err
+        }));
+});
 
 videoRouter.get('/:id', (req, res) => {
     const {
