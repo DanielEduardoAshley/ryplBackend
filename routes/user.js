@@ -2,12 +2,12 @@ const express = require('express');
 const userRouter = express.Router();
 const userService = require('../services/user');
 
-userRouter.get('/:username', (req, res) => {
+userRouter.get('/:id', (req, res) => {
     const {
-        username
+        id
     } = req.params;
 
-    userService.getUser(username)
+    userService.getUser(id)
         .then(data => res.status(200).json({
             data
         }))
