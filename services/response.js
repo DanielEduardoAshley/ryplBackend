@@ -3,18 +3,6 @@ const {
 } = require('./dbConnect')
 const responseService = {};
 
-responseService.getResponses = (id) => {
-    const sql = `
-    SELECT *
-    FROM response
-    WHERE video_id = $[id]
-    `;
-
-    return db.any(sql, {
-        id
-    });
-};
-
 responseService.postResponse = (userID, videoID, videoTitle, videoUrl, description) => {
     const sql = `
     INSERT into response (user_id, video_id, video_title, video_url, description)

@@ -60,6 +60,18 @@ videoService.getAllCategories = () => {
     return db.any(sql);
 }
 
+videoService.getVidsOfCategory = (id) => {
+    const sql = `
+    SELECT *
+    FROM video
+    WHERE category_id = $[id]
+    `;
+
+    return db.any(sql, {
+        id
+    })
+}
+
 videoService.getVideos = (id) => {
     const sql = `
     SELECT *
