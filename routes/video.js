@@ -69,21 +69,23 @@ videoRouter.get('/:id', (req, res) => {
 
 videoRouter.post('/', (req, res) => {
     const {
-        id,
-        category,
-        title,
-        url,
+        userId,
+        categoryId,
+        videoTitle,
+        responseTo,
+        videoUrl,
+        thumbnailUrl,
         annotation,
         description
     } = req.body;
 
-    videoService.postVideo(id, category, title, url, annotation, description)
+    videoService.postVideo(userId, categoryId, videoTitle, responseTo, videoUrl, thumbnailUrl, annotation, description)
         .then(data => res.status(200).json({
             data
         }))
         .catch(err => res.status(400).json({
             err
-        }));
+        }))
 });
 
 videoRouter.delete('/', (req, res) => {
