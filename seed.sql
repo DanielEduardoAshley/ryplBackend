@@ -81,13 +81,13 @@ VALUES
 INSERT INTO video
     (user_id, category_id, video_title,response_to,video_url, description, likes, dislikes, views)
 VALUES
-    (1, 1, 'my dog is happy', null, 'urlforvid', 'he wont stop licking me!', 10, 2, 20),
-    (1, 2, 'my cat is cute', 1, 'urlforvid2', 'he scratched me' , 0, 0, 5),
-    (2, 3, 'hear me sing', 1, 'urlforvid3', 'my voice is nice', 0, 0, 3),
-    (3, 4, 'my painting', 2, 'urlforvid4', 'watch me draw', 0, 0, 8),
-    (3, 5, 'im making chicken', 3, 'urlforvid5', 'curry chicken', 0, 0, 40),
-    (3, 5, 'im making chicken', 3, 'urlforvid5', 'curry chicken', 0, 0, 40),
-    (3, 5, 'im making chicken', 2, 'urlforvid5', 'curry chicken', 0, 0, 40)
+    (1, 1, 'my dog is happy', null, 'http://techslides.com/demos/sample-videos/small.webm', 'he wont stop licking me!', 10, 2, 20),
+    (1, 2, 'my cat is cute', 1, 'http://techslides.com/demos/sample-videos/small.webm', 'he scratched me' , 0, 0, 5),
+    (2, 3, 'hear me sing', 1, 'http://techslides.com/demos/sample-videos/small.webm', 'my voice is nice', 0, 0, 3),
+    (3, 4, 'my painting', 2, 'http://techslides.com/demos/sample-videos/small.webm', 'watch me draw', 0, 0, 8),
+    (3, 5, 'im making chicken', 3, 'http://techslides.com/demos/sample-videos/small.webm', 'curry chicken', 0, 0, 40),
+    (3, 5, 'im making chicken', 3, 'http://techslides.com/demos/sample-videos/small.webm', 'curry chicken', 0, 0, 40),
+    (3, 5, 'im making chicken', 2, 'http://techslides.com/demos/sample-videos/small.webm', 'curry chicken', 0, 0, 40)
 
 
 

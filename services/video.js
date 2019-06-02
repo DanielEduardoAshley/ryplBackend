@@ -130,5 +130,15 @@ videoService.updateVideo = (id, title, description) => {
     });
 };
 
+videoService.getCategoryName = (id) => {
+    const sql = `
+    SELECT *
+    FROM category
+    WHERE id = $[id]
+    `;
+    return db.one(sql, {
+        id
+    });
+};
 
 module.exports = videoService;

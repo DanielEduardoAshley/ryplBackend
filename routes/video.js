@@ -60,6 +60,12 @@ videoRouter.get('/category/:id', async (req, res) => {
     try {
         info.categories = await videoService.getAllCategories();
         info.vidsOfCategory = await videoService.getVidsOfCategory(id);
+        info.categoryName = await videoService.getCategoryName(id);
+
+        for (let i = 0; i < info.vidsOfCategory.length; i++) {
+            info.vidsOfCategory[i].responses = await videoService.getResponseToMaster(info.vidsOfCategory[i].id);
+        }
+
         res.status(200).json({
             info
         })
