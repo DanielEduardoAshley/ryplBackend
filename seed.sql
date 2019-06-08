@@ -29,11 +29,11 @@ CREATE TABLE video
     response_to INT REFERENCES video(id) NULL,
     video_url VARCHAR NOT NULL,
     thumbnail_url VARCHAR,
-    annotation VARCHAR,
+    annotation VARCHAR NULL,
     description VARCHAR,
-    likes INT,
-    dislikes INT,
-    views INT,
+    likes INT ,
+    dislikes INT ,
+    views INT ,
     time_posted TIMESTAMP DEFAULT NOW()
 );
 
@@ -79,15 +79,16 @@ VALUES
     ('Technology');
 
 INSERT INTO video
-    (user_id, category_id, video_title,response_to,video_url, description, likes, dislikes, views)
+    (user_id, category_id, video_title,response_to,video_url,thumbnail_url,annotation, description, likes, dislikes, views)
 VALUES
-    (1, 1, 'my dog is happy', null, 'http://techslides.com/demos/sample-videos/small.webm', 'he wont stop licking me!', 10, 2, 20),
-    (1, 2, 'my cat is cute', 1, 'http://techslides.com/demos/sample-videos/small.webm', 'he scratched me' , 0, 0, 5),
-    (2, 3, 'hear me sing', 1, 'http://techslides.com/demos/sample-videos/small.webm', 'my voice is nice', 0, 0, 3),
-    (3, 4, 'my painting', 2, 'http://techslides.com/demos/sample-videos/small.webm', 'watch me draw', 0, 0, 8),
-    (3, 5, 'im making chicken', 3, 'http://techslides.com/demos/sample-videos/small.webm', 'curry chicken', 0, 0, 40),
-    (3, 5, 'im making chicken', 3, 'http://techslides.com/demos/sample-videos/small.webm', 'curry chicken', 0, 0, 40),
-    (3, 5, 'im making chicken', 2, 'http://techslides.com/demos/sample-videos/small.webm', 'curry chicken', 0, 0, 40)
+    (1, 1, 'my dog is happy', null, 'http://techslides.com/demos/sample-videos/small.webm',null,null, 'he wont stop licking me!', 10, 2, 20),
+    (1, 2, 'my cat is cute', 1, 'http://techslides.com/demos/sample-videos/small.webm',null,null, 'he scratched me' , 0, 0, 5),
+    (2, 3, 'hear me sing', 1, 'http://techslides.com/demos/sample-videos/small.webm',null,null, 'my voice is nice', 0, 0, 3),
+    (3, 4, 'my painting', 2, 'http://techslides.com/demos/sample-videos/small.webm',null,null, 'watch me draw', 0, 0, 8),
+    (3, 5, 'im making chicken', 3, 'http://techslides.com/demos/sample-videos/small.webm',null,null, 'curry chicken', 0, 0, 40),
+    (3, 5, 'im making chicken', 3, 'http://techslides.com/demos/sample-videos/small.webm',null,null, 'curry chicken', 0, 0, 40),
+    (3, 5, 'im making chicken', 2, 'http://techslides.com/demos/sample-videos/small.webm',null,null, 'curry chicken', 0, 0, 40),
+    (3, 5, 'im making chickens', 2, 'http://techslides.com/demos/sample-videos/small.webm',null,null, 'curry chickens', 0, 0, 40)
 
 
 
