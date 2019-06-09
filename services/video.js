@@ -141,4 +141,16 @@ videoService.getCategoryName = (id) => {
     });
 };
 
+videoService.addView = (id) => {
+    const sql = `
+    UPDATE video
+    SET views = views + 1
+    WHERE id = $[id]
+    RETURNING views
+    `;
+    return db.any(sql, {
+        id
+    });
+};
+
 module.exports = videoService;
