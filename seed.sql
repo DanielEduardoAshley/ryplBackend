@@ -1,7 +1,8 @@
-DROP DATABASE IF EXISTS rypl;
-CREATE DATABASE rypl;
+-- DROP DATABASE IF EXISTS rypl;
+-- CREATE DATABASE rypl;
 
-\c rypl
+-- \c rypl
+DROP TABLE IF EXISTS users, category, video, followers;
 
 CREATE TABLE users
 (
