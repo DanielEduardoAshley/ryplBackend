@@ -171,11 +171,11 @@ videoService.getHomePageVideoCardData = () => {
 
 videoService.getCategoryPageVideoCardData = id => {
   const sql = `
-    SELECT * 
+    SELECT video.*, users.username, users.img_url
     FROM video 
     JOIN users 
     ON video.user_id = users.id 
-    WHERE category_id = $[id]`;
+    WHERE video.category_id = $[id]`;
   return db.any(sql, { id });
 };
 
