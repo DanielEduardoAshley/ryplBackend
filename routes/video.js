@@ -193,16 +193,14 @@ videoRouter.put("/views", (req, res) => {
 });
 
 videoRouter.get("/HomePageVideoCards", (req, res) => {
-  const { id } = req.body;
-
   videoService
-    .getHomePageVideoCardData(id)
+    .getHomePageVideoCardData()
     .then(data => res.status(200).json({ data }))
     .catch(err => res.status(400).json({ err }));
 });
 
-videoRouter.get("CategoryPageVideoCards", (req, res) => {
-  const { id } = req.body;
+videoRouter.get("/CategoryPageVideoCards/:id", (req, res) => {
+  const { id } = req.params;
   videoService
     .getCategoryPageVideoCardData(id)
     .then(data => res.status(200).json({ data }))

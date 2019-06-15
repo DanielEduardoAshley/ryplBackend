@@ -160,13 +160,13 @@ videoService.addView = id => {
   });
 };
 
-videoService.getHomePageVideoCardData = id => {
+videoService.getHomePageVideoCardData = () => {
   const sql = `
   SELECT * 
   FROM video 
   JOIN users 
   ON video.user_id = users.id WHERE user_id= $[id]`;
-  return db.any(sql, { id });
+  return db.any(sql);
 };
 
 videoService.getCategoryPageVideoCardData = id => {
