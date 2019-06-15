@@ -162,7 +162,7 @@ videoService.addView = id => {
 
 videoService.getHomePageVideoCardData = () => {
   const sql = `
-  SELECT * 
+  SELECT video.*, users.username, users.img_url 
   FROM video 
   JOIN users 
   ON video.user_id = users.id`;
