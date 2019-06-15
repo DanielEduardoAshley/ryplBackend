@@ -63,7 +63,7 @@ videoRouter.get("/category/:id", async (req, res) => {
 
   try {
     info.categories = await videoService.getAllCategories();
-    info.vidsOfCategory = await videoService.getVidsOfCategory(id);
+    info.vidsOfCategory = await videoService.getCategoryPageVideoCardData(id);
     info.categoryName = await videoService.getCategoryName(id);
 
     for (let i = 0; i < info.vidsOfCategory.length; i++) {
@@ -88,22 +88,6 @@ videoRouter.get("/category/:id", async (req, res) => {
   //     .catch(err => res.status(400).json({
   //         err
   //     }));
-});
-
-videoRouter.get("/:id", (req, res) => {
-  const { id } = req.params;
-  videoService
-    .getVideos(id)
-    .then(data =>
-      res.status(200).json({
-        data
-      })
-    )
-    .catch(err =>
-      res.status(400).json({
-        err
-      })
-    );
 });
 
 videoRouter.post("/", (req, res) => {
@@ -192,19 +176,35 @@ videoRouter.put("/views", (req, res) => {
     );
 });
 
-videoRouter.get("/HomePageVideoCards", (req, res) => {
+videoRouter.get("/homepagevideocards", (req, res) => {
   videoService
     .getHomePageVideoCardData()
     .then(data => res.status(200).json({ data }))
     .catch(err => res.status(400).json({ err }));
 });
 
-videoRouter.get("/CategoryPageVideoCards/:id", (req, res) => {
+videoRouter.get("/categorypagevideocards/:id", (req, res) => {
   const { id } = req.params;
   videoService
     .getCategoryPageVideoCardData(id)
     .then(data => res.status(200).json({ data }))
     .catch(err => res.status(400).json({ err }));
+});
+
+videoRouter.get("/:id", (req, res) => {
+  const { id } = req.params;
+  videoService
+    .getVideos(id)
+    .then(data =>
+      res.status(200).json({
+        data
+      })
+    )
+    .catch(err =>
+      res.status(400).json({
+        err
+      })
+    );
 });
 
 module.exports = videoRouter;

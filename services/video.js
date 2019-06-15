@@ -165,7 +165,7 @@ videoService.getHomePageVideoCardData = () => {
   SELECT * 
   FROM video 
   JOIN users 
-  ON video.user_id = users.id WHERE user_id= $[id]`;
+  ON video.user_id = users.id`;
   return db.any(sql);
 };
 
@@ -175,7 +175,7 @@ videoService.getCategoryPageVideoCardData = id => {
     FROM video 
     JOIN users 
     ON video.user_id = users.id 
-    WHERE category_id = $[id];`;
+    WHERE category_id = $[id]`;
   return db.any(sql, { id });
 };
 
