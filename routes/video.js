@@ -2,9 +2,23 @@ const express = require("express");
 const videoRouter = express.Router();
 const videoService = require("../services/video");
 
+// videoRouter.get("/home", async (req, res) => {
+//   try {
+//     const popVids = await videoService.getPopularVideos();
+//     const allCategories = await videoService.getAllCategories();
+
+//     res.status(200).json({
+//       popVids,
+//       allCategories
+//     });
+//   } catch (err) {
+//     res.status(400).json(err);
+//   }
+// });
+
 videoRouter.get("/home", async (req, res) => {
   try {
-    const popVids = await videoService.getPopularVideos();
+    const popVids = await videoService.getHomePageVideoCardData();
     const allCategories = await videoService.getAllCategories();
 
     res.status(200).json({
